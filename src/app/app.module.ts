@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
-import { AuthModule } from './auth/auth/auth.module';
 import { LoginComponent } from './auth/components/login/login.component';
 import { RegisterComponent } from './auth/components/register/register.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -21,13 +20,14 @@ import { EnrollsComponent } from './auth/components/enrolls/enrolls.component';
     SidebarComponent,
     HeaderComponent,
     CoursesComponent,
-    EnrollsComponent
+    EnrollsComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    AuthModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule

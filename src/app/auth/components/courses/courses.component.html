@@ -1,19 +1,89 @@
-<!--div class="row">
-    <div class="col-md-4" *ngFor="let course of courses">
-      <div class="card mb-4 box-shadow">
-        <img class="card-img-top" [src]="course.image" alt="{{ course.title }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ course.title }}</h5>
-          <p class="card-text">{{ course.description }}</p>
-          <p class="card-text">Instructor: {{ course.instructor }}</p>
+<app-header></app-header>
+<div id="nuevo" *ngIf="esAdministrador()" >
+  <button class="btn btn-success" id="btn" (click)="openModal(modal)">Nuevo Curso</button>
+</div>
+
+<!-- Start Tabla -->
+<div class="row" id="principal">
+    <div class="col-md-4" *ngFor="let curso of this.cursos.data">
+      <div class="card mb-4 box-shadow">        
+        <div class="card-body" id="cardown">
           <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Ver más</button>
+            <p class="card-text">Cupos: {{ curso.cupo_inscritos }}</p>
+            <p class="card-text">{{ curso.fecha_inicio }}</p>
+          </div>         
+          
+          <div class="text-center">
+            <h5 class="card-title">{{ curso.nombre_curso }} </h5>          
+            <p class="card-text">{{ curso.capacitador1 }}</p>
+            <p class="card-text">{{ curso.enlace_curso }}</p>
+          </div>
+          
+          <div class="d-flex justify-content-between align-items-right">  
+            <div>
+              <small class="text-bold">Creditos: {{ curso.creditos }}</small>
+              <small class=""> Hr: {{ curso.horas }}</small> 
+            </div>    
+            <div class="btn-group">   
+          
+              <button *ngIf="esAdministrador()" type="button" id="btnfoot3" (click)="openModal(modal, curso)"><i class="fa-solid fa-edit fa-2xl" style="color: #fff;" id="font-icon"></i></button>
+              <button *ngIf="esAdministrador()" type="button" id="btnfoot" (click)="deleteCourse(curso.id_curso)"><i class="fa-solid fa-trash-can fa-2xl" style="color: #fff;" id="font-icon"></i></button>
+              <button type="button" id="btnfoot2" (click)="mostrarMatriculados(curso.id_curso)"><i class="fa-solid fa-right-to-bracket fa-2xl" style="color: #fff;" id="font-icon"></i></button>
             </div>
-            <small class="text-muted">{{ course.duration }}</small>
           </div>
         </div>
       </div>
     </div>
-  </div-->
-  
+</div>
+<!--End Tabla -->
+
+<!-- Modal de creación y edición de cursos -->
+<ng-template #modal let-modal class="modal-dialog modal-dialog-centered"  tabindex="-1" >
+  <div class="modal-header">
+    <h4 class="modal-title">{{ isEditing ? 'Editar Curso' : 'Nuevo Curso' }}</h4>
+    <button type="button"aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true"><i class="fa-solid fa-close fa-2xl" style="color: #d90404;" id="font-icon"></i></span>
+    </button>
+  </div>
+  <div class="modal-body mx-3">
+    <form (ngSubmit)="onSubmit()" #cursoForm="ngForm">
+      <div class="form-group">
+        <label for="nombre">Nombre del Curso:</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="curso.nombre_curso" required>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Fecha Inicio:</label>
+        <input type="text" class="form-control" id="fecha" name="fecha" [(ngModel)]="curso.fecha_inicio" required>
+      </div>    
+      
+      <div class="form-group">
+        <div class="row">
+          <div class="col-4">
+            <label for="capacitador">Horas:</label>
+            <input type="number" class="form-control" id="horas" name="horas" [(ngModel)]="curso.horas" required>
+          </div>
+          <div class="col-4">
+            <label for="fecha">Creditos:</label>
+            <input type="number" class="form-control" id="creditos" name="creditos" [(ngModel)]="curso.creditos" required>      
+          </div>
+          <div class="col-4">
+            <label for="fecha">Cupos:</label>
+            <input type="number" class="form-control" id="cupo_inscritos" name="cupo_inscritos" [(ngModel)]="curso.cupo_inscritos" required>      
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="capacitador">Capacitador:</label>
+        <input type="text" class="form-control" id="capacitador" name="capacitador" [(ngModel)]="curso.capacitador1" required>
+      </div>
+      <div class="form-group">
+        <label for="fecha">Enlace del Curso:</label>
+        <input type="text" class="form-control" id="enlace" name="enlace" [(ngModel)]="curso.enlace_curso" required>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        <button type="submit" class="btn btn-success">{{ isEditing ? 'Editar' : 'Guardar' }}</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

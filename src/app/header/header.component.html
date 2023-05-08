@@ -1,11 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" id="header">
-    <a class="navbar-brand" href="#" id="logotxt">Registro de Capacitaciones</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-    
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg " id="header">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <a class="navbar-brand"  id="logotxt">Registro de Capacitaciones</a>    
+  
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+       
+        <!-- Avatar -->
+          <a
+            class="d-flex align-items-center"
+            id="navbarDropdownMenuAvatar"
+            role="button"
+            data-mdb-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <button class = 'btn btn-outline-danger' (click) = 'logout()'>Salir</button>
+            <img
+              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+              class="rounded-circle"
+              height="45"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"
+            />            
+          </a>
+      </div>
+      <!-- Right elements -->
     </div>
-</nav>
-    <router-outlet></router-outlet>
-
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->

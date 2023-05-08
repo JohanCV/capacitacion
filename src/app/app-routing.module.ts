@@ -6,12 +6,13 @@ import { RegisterComponent } from './auth/components/register/register.component
 import { CoursesComponent } from './auth/components/courses/courses.component';
 import { EnrollsComponent } from './auth/components/enrolls/enrolls.component';
 
+
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, pathMatch: "full" },
+  { path: 'login', component: LoginComponent },
   { path: '', component: LoginComponent, pathMatch: "full" },
   { path: 'register', component: RegisterComponent },
   { path: 'courses', component: CoursesComponent },
-  { path: 'enrolls', component: EnrollsComponent },
+  { path: 'enrolls/:id', component: EnrollsComponent },
 ];
 
 @NgModule({
